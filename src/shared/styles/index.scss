@@ -1,0 +1,9 @@
+@use './colors' as colors;
+@use './reset' as reset;
+@use './fonts' as fonts;
+
+body {
+  font-family: 'SFProDisplayRegular', sans-serif;
+  background-color: colors.$bg-dark;
+  color: #fff;
+}

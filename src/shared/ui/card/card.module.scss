@@ -1,0 +1,7 @@
+@use '../../styles/colors.scss' as colors;
+
+.card {
+  background-color: colors.$bg-menu;
+  padding: 16px;
+  border-radius: 16px;
+}
