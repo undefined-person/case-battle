@@ -6,6 +6,7 @@ import Gifts from '../../pages/gifts/gifts'
 import Upgrade from '../../pages/upgrade/upgrade'
 import Profile from '../../pages/profile/profile'
 import Inventory from '../../pages/inventory/inventory'
+import History from '../../pages/history/history'
 
 const routes = [
   {
@@ -31,6 +32,14 @@ const routes = [
   {
     path: '/profile/inventory',
     element: <Inventory />,
+  },
+  {
+    path: '/profile/history',
+    element: <History />,
+  },
+  {
+    path: '*',
+    element: <div>Page not found</div>,
   },
 ]
 

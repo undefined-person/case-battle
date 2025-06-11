@@ -12,7 +12,9 @@
   h1 {
     font-size: 24px;
     font-weight: 600;
-    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 

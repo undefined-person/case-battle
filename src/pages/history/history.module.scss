@@ -1,0 +1,55 @@
+@use '../../shared/styles/colors.scss' as colors;
+
+.header_container {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+
+  .back_btn {
+    margin-right: auto;
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.history_table {
+  margin-top: 32px;
+}
+
+.history_table_header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid colors.$gray;
+  color: colors.$gray;
+  padding-bottom: 12px;
+}
+
+.history_item {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid colors.$gray;
+  padding: 12px 0;
+  font-size: 14px;
+}
+
+.history_item_status {
+  margin-top: 6px;
+
+  &.success {
+    color: colors.$green;
+  }
+
+  &.error {
+    color: colors.$red;
+  }
+
+  &.canceled {
+    color: colors.$gray;
+  }
+}
