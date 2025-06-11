@@ -1,0 +1,75 @@
+@use '../../shared/styles/colors.scss' as colors;
+
+.header_container {
+  margin-top: 32px;
+
+  gap: 12px;
+  margin-bottom: 12px;
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+  }
+}
+
+.inventory_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.inventory_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 12px;
+  background-color: colors.$blue-dark;
+
+  img {
+    width: 114px;
+    height: 114px;
+    object-fit: cover;
+  }
+}
+
+.inventory_item_title {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.inventory_item_price {
+  font-size: 14px;
+}
+
+.inventory_item_buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+
+  svg {
+    color: colors.$yellow;
+  }
+
+  button {
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  button:last-child {
+    background: transparent;
+    color: #fff;
+    border: 1px solid colors.$primary-color;
+  }
+}

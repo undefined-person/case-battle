@@ -5,6 +5,7 @@ import Partners from '../../pages/partners/partners'
 import Gifts from '../../pages/gifts/gifts'
 import Upgrade from '../../pages/upgrade/upgrade'
 import Profile from '../../pages/profile/profile'
+import Inventory from '../../pages/inventory/inventory'
 
 const routes = [
   {
@@ -26,6 +27,10 @@ const routes = [
   {
     path: '/profile',
     element: <Profile />,
+  },
+  {
+    path: '/profile/inventory',
+    element: <Inventory />,
   },
 ]
 
