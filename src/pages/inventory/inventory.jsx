@@ -14,7 +14,7 @@ export default function Inventory() {
     <div>
       <Header />
       <div className={styles.header_container}>
-        <BackBtn onClick={() => navigate(-1)} />
+        <BackBtn className={styles.back_btn} onClick={() => navigate(-1)} />
         <h1>Инвентарь</h1>
       </div>
       <div className={styles.inventory_container}>

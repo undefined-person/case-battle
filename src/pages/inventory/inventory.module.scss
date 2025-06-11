@@ -2,18 +2,22 @@
 
 .header_container {
   margin-top: 32px;
+  display: flex;
+  align-items: center;
 
-  gap: 12px;
-  margin-bottom: 12px;
+  .back_btn {
+    margin-right: auto;
+  }
 
   h1 {
     font-size: 24px;
     font-weight: 600;
-    text-align: center;
+    margin: 0 auto;
   }
 }
 
 .inventory_container {
+  margin-top: 20px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px;
