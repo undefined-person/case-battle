@@ -2,11 +2,13 @@ import { useState, useMemo } from 'react'
 import Button from '../../shared/ui/button/button'
 import Card from '../../shared/ui/card/card'
 import styles from './upgrade.module.scss'
+import { useTranslation } from 'react-i18next'
 
 const MULTIPLIERS = ['x1.5', 'x2', 'x3', 'x5', 'x10', 'x20']
 const TICK_COUNT = 24
 
 export default function Upgrade() {
+  const { t } = useTranslation()
   const [progress] = useState(36)
   const [selectedMultiplier, setSelectedMultiplier] = useState('x2')
   const [activeTab, setActiveTab] = useState('inventory')
@@ -25,7 +27,7 @@ export default function Upgrade() {
 
   return (
     <div>
-      <h1 className={styles.upgrade_title}>Апгрейд NFT</h1>
+      <h1 className={styles.upgrade_title}>{t('upgrade.title')}</h1>
       <div className={styles.progress_container}>
         <div className={styles.progress_background} />
         <div className={styles.marker} />
@@ -46,7 +48,7 @@ export default function Upgrade() {
         <div className={styles.progress_text}>{progress}%</div>
       </div>
       <div>
-        <h2 className={styles.multiplier_title}>Выберите подарок для улучшения</h2>
+        <h2 className={styles.multiplier_title}>{t('upgrade.progress_title')}</h2>
         <div className={styles.multiplier_container}>
           {MULTIPLIERS.map((multiplier) => (
             <button
@@ -58,34 +60,34 @@ export default function Upgrade() {
           ))}
         </div>
       </div>
-      <Button className={styles.upgrade_button}>Улучшить</Button>
+      <Button className={styles.upgrade_button}>{t('upgrade.upgrade_button')}</Button>
       <div className={styles.items_container}>
         <div className={styles.item_slot}>
           <div className={styles.plus_sign}>+</div>
-          <div className={styles.item_slot_text}>Выберите ваш предмет</div>
+          <div className={styles.item_slot_text}>{t('upgrade.select_item')}</div>
         </div>
         <div className={styles.item_slot}>
           <div className={styles.plus_sign}>+</div>
-          <div className={styles.item_slot_text}>Выберите ваш предмет</div>
+          <div className={styles.item_slot_text}>{t('upgrade.select_item')}</div>
         </div>
       </div>
       <div className={styles.tabs_container}>
         <button
           className={`${styles.tab} ${activeTab === 'inventory' ? styles.active : ''}`}
           onClick={() => setActiveTab('inventory')}>
-          ИНВЕНТАРЬ
+          {t('upgrade.inventory')}
         </button>
         <button
           className={`${styles.tab} ${activeTab === 'gift' ? styles.active : ''}`}
           onClick={() => setActiveTab('gift')}>
-          ЖЕЛАЕМЫЙ GIFT
+          {t('upgrade.desired_gift')}
         </button>
       </div>
       <Card>
         <div className={styles.search_wrapper}>
-          <input type="text" className={styles.search_input} placeholder="Быстрый поиск" />
+          <input type="text" className={styles.search_input} placeholder={t('upgrade.quick_search')} />
         </div>
-        <div className={styles.no_items_message}>В вашем инвентаре нет предметов стоимостью выше 100 Stars</div>
+        <div className={styles.no_items_message}>{t('upgrade.no_items')}</div>
       </Card>
     </div>
   )

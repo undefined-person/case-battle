@@ -1,0 +1,80 @@
+{
+  "profile": {
+    "title": "Ваше Имя",
+    "userId": "ID пользователя {{id}}",
+    "menu": {
+      "inventory": "Инвентарь",
+      "history": "История",
+      "upgrades": "Апгрейды",
+      "promoCode": "Активировать промокод",
+      "enterPromo": "Введите промокод",
+      "activate": "Активировать"
+    },
+    "language": {
+      "select": "Выбрать язык"
+    }
+  },
+  "menu": {
+    "cases": "Кейсы",
+    "gifts": "Конкурсы",
+    "partners": "Партнеры",
+    "upgrade": "Апгрейд",
+    "profile": "Профиль"
+  },
+  "gifts": {
+    "title": "Конкурсы",
+    "filters": {
+      "free": "Бесплатные"
+    },
+    "everyday_gift": "Ежедневный розыгрыш",
+    "requirements": "Условия",
+    "all_time": "за все время",
+    "hour": "час.",
+    "minute": "мин.",
+    "second": "сек.",
+    "days": "д.",
+    "participants": "Участников",
+    "participate": "Принять участие",
+    "previous_winners": "Предыдущие победители"
+  },
+  "partners": {
+    "title": "Партнеры",
+    "invite_title": "Приглашай друзей -\nПолучай награды!",
+    "invite_info": "Каждый приглашенный друг = 100",
+    "invite_button": "Пригласить друга",
+    "promo_code_button": "Создать промокод",
+    "promo_code_info": "Друг вводит промокод и крутит кейс. \n Вы получаете 100 звезд после его пополнения.",
+    "invited_friends": "Приглашенные друзья"
+  },
+  "cases": {
+    "filters": {
+      "filter_1": "Фильтр 1",
+      "filter_2": "Фильтр 2",
+      "filter_3": "Фильтр 3"
+    }
+  },
+  "upgrade": {
+    "title": "Апгрейд NFT",
+    "progress_title": "Выберите подарок для улучшения",
+    "upgrade_button": "Улучшить",
+    "select_item": "Выберите ваш предмет",
+    "inventory": "Инвентарь",
+    "desired_gift": "Желаемый GIFT",
+    "quick_search": "Быстрый поиск",
+    "no_items": "В вашем инвентаре нет предметов стоимостью выше 100 Stars"
+  },
+  "inventory": {
+    "title": "Инвентарь",
+    "sell_for": "Продать за",
+    "withdraw_for": "Вывести за"
+  },
+  "history": {
+    "title": "История",
+    "success": "Успешно",
+    "canceled": "Отменено",
+    "error": "Ошибка"
+  },
+  "verified": "Проверено",
+  "unverified": "Непроверено",
+  "connect_to_wallet": "Подключить TON"
+}

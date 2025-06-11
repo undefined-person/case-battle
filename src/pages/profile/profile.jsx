@@ -8,20 +8,21 @@ import { useNavigate } from 'react-router'
 import styles from './profile.module.scss'
 import Button from '../../shared/ui/button/button'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const menuItems = [
   {
-    label: 'Инвентарь',
+    label: 'menu.inventory',
     icon: <GiftIcon />,
     link: '/profile/inventory',
   },
   {
-    label: 'История',
+    label: 'menu.history',
     icon: <HistoryIcon />,
     link: '/profile/history',
   },
   {
-    label: 'Апгрейды',
+    label: 'menu.upgrades',
     icon: <ArrowsIcon />,
     link: '/profile/upgrade',
   },
@@ -29,16 +30,20 @@ const menuItems = [
 
 export default function Profile() {
   const navigate = useNavigate()
-  const [language, setLanguage] = useState('en')
+  const { t, i18n } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng)
+  }
 
   return (
     <div>
       <div className={styles.profile_container}>
         <img src={Avatar} alt="avatar" className={styles.profile_avatar} />
         <div className={styles.profile_info}>
-          <h1 className={styles.profile_name}>Your Name</h1>
-          <p className={styles.profile_id}>User ID 1803167</p>
+          <h1 className={styles.profile_name}>{t('profile.title')}</h1>
+          <p className={styles.profile_id}>{t('profile.userId', { id: '1803167' })}</p>
         </div>
       </div>
 
@@ -46,29 +51,28 @@ export default function Profile() {
         {menuItems.map((item) => (
           <div key={item.label} className={styles.menu_item} onClick={() => navigate(item.link)}>
             {item.icon}
-            {item.label}
+            {t(`profile.${item.label}`)}
           </div>
         ))}
         <div className={styles.promo_container} onClick={() => setIsOpen(!isOpen)}>
           <div className={`${styles.promo_header} ${isOpen ? styles.active : ''}`}>
             <PlusIcon />
-            <span>Активировать промокод</span>
+            <span>{t('profile.menu.promoCode')}</span>
           </div>
           {isOpen && (
             <div className={styles.promo_content}>
-              <input type="text" placeholder="Введите промокод" className={styles.promo_input} />
-              <Button className={styles.promo_button}>Активировать</Button>
+              <input type="text" placeholder={t('profile.menu.enterPromo')} className={styles.promo_input} />
+              <Button className={styles.promo_button}>{t('profile.menu.activate')}</Button>
             </div>
           )}
         </div>
-
         <div className={styles.language_container}>
-          <span>Вибрать язык</span>
+          <span>{t('profile.language.select')}</span>
           <div className={styles.language_buttons}>
-            <Button onClick={() => setLanguage('en')} className={language === 'en' ? styles.active : ''}>
+            <Button onClick={() => changeLanguage('en')} className={i18n.language === 'en' ? styles.active : ''}>
               English
             </Button>
-            <Button onClick={() => setLanguage('ru')} className={language === 'ru' ? styles.active : ''}>
+            <Button onClick={() => changeLanguage('ru')} className={i18n.language === 'ru' ? styles.active : ''}>
               Русский
             </Button>
           </div>

@@ -6,24 +6,27 @@ import TrophiesIcon from '../../shared/assets/icons/trophy.svg?react'
 import Gift from '../../shared/assets/images/gift.png'
 
 import styles from './gifts.module.scss'
+import { useTranslation } from 'react-i18next'
+
 export default function Gifts() {
+  const { t } = useTranslation()
   return (
     <div>
-      <h1 className={styles.gifts_title}>Конкурсы</h1>
+      <h1 className={styles.gifts_title}>{t('gifts.title')}</h1>
       <div className={styles.gifts_filters}>
-        <Button className={styles.gifts_filters_button}>Бесплатные (2)</Button>
+        <Button className={styles.gifts_filters_button}>{t('gifts.filters.free')} (2)</Button>
       </div>
       <Card className={styles.gifts_card}>
-        <h2 className={styles.gifts_card_title}>Ежедневный розыгрыш</h2>
+        <h2 className={styles.gifts_card_title}>{t('gifts.everyday_gift')}</h2>
         <p className={styles.gifts_card_description}>
-          Условия:{' '}
+          {t('gifts.requirements')}:{' '}
           <span className={styles.gifts_card_description_value}>
             <span className={styles.gifts_card_description_value_icon}>
               <TonIcon />
             </span>
             10 000
           </span>{' '}
-          за все время
+          {t('gifts.all_time')}
         </p>
         <div className={styles.gifts_card_description_items}>
           <div className={styles.gifts_card_description_item}>
@@ -86,14 +89,14 @@ export default function Gifts() {
           </div>
         </div>
         <div className={styles.gifts_card_description_footer}>
-          <div className={styles.gifts_card_description_footer_item}>0д.</div>
+          <div className={styles.gifts_card_description_footer_item}>0{t('gifts.days')}</div>
           <div
             className={`${styles.gifts_card_description_footer_item} ${styles.gifts_card_description_footer_item_time__container}`}>
             <div className={styles.gifts_card_description_footer_item_time}>19 : 08 : 48</div>
             <div className={styles.gifts_card_description_footer_item_time_text}>
-              <span>час.</span>
-              <span>мин.</span>
-              <span>сек.</span>
+              <span>{t('gifts.hour')}</span>
+              <span>{t('gifts.minute')}</span>
+              <span>{t('gifts.second')}</span>
             </div>
           </div>
           <div className={styles.gifts_card_description_people}>
@@ -101,14 +104,14 @@ export default function Gifts() {
               <PeopleIcon />
               <span>1279</span>
             </div>
-            <span>Участников</span>
+            <span>{t('gifts.participants')}</span>
           </div>
         </div>
         <div className={styles.gifts_card_description_footer_buttons}>
-          <Button>Принять участие</Button>
+          <Button>{t('gifts.participate')}</Button>
           <Button>
             <TrophiesIcon />
-            <span>Предыдущие победители</span>
+            <span>{t('gifts.previous_winners')}</span>
           </Button>
         </div>
       </Card>

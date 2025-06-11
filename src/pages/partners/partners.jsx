@@ -6,33 +6,31 @@ import Card from '../../shared/ui/card/card'
 
 import styles from './partners.module.scss'
 import { partners } from '../../shared/constants/partners'
+import { useTranslation } from 'react-i18next'
 
 export default function Partners() {
+  const { t } = useTranslation()
   return (
     <div>
       <div className={styles.partners_container}>
-        <p className={styles.partners_title}>
-          Приглашай друзей - <br /> Получай награды!
-        </p>
+        <p className={styles.partners_title}>{t('partners.invite_title')}</p>
         <div className={styles.partners_info}>
-          Каждый приглашенный друг = 100 <StarIcon />
+          {t('partners.invite_info')} <StarIcon />
         </div>
         <div className={styles.partners_buttons_container}>
-          <Button className={styles.partners_button}>Пригласить друга</Button>
+          <Button className={styles.partners_button}>{t('partners.invite_button')}</Button>
           <Button className={styles.partners_button}>
             <CopyIcon />
           </Button>
         </div>
         <Button className={styles.partners_button}>
-          Создать промокод
+          {t('partners.promo_code_button')}
           <TicketIcon />
         </Button>
       </div>
       <Card className={styles.partners_card}>
-        <h2 className={styles.partners_card_title}>Приглашенные друзья</h2>
-        <p className={styles.partners_card_info}>
-          Друг вводит промокод и крутит кейс. <br /> Вы получаете 100 звезд после его пополнения.
-        </p>
+        <h2 className={styles.partners_card_title}>{t('partners.invited_friends')}</h2>
+        <p className={styles.partners_card_info}>{t('partners.promo_code_info')}</p>
         <div className={styles.partners_items_container}>
           {partners.map((partner) => (
             <PartnerItem key={partner.id} {...partner} />
@@ -44,11 +42,12 @@ export default function Partners() {
 }
 
 function PartnerItem({ image, name, status }) {
+  const { t } = useTranslation()
   return (
     <div className={styles.partners_item}>
       <img src={image} alt={name} />
       <p className={styles.partners_item_name}>{name}</p>
-      <p className={styles.partners_item_status}>{status}</p>
+      <p className={styles.partners_item_status}>{t(status)}</p>
     </div>
   )
 }

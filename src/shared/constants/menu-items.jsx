@@ -6,27 +6,27 @@ import ProfileIcon from '../assets/icons/profile.svg?react'
 
 export const menuItems = [
   {
-    label: 'Конкурсы',
+    label: 'menu.gifts',
     icon: <SparkleIcon />,
     link: '/gifts',
   },
   {
-    label: 'Партнеры',
+    label: 'menu.partners',
     icon: <PeopleIcon />,
     link: '/partners',
   },
   {
-    label: 'Кейсы',
+    label: 'menu.cases',
     icon: <CaseIcon />,
     link: '/',
   },
   {
-    label: 'Апгрейд',
+    label: 'menu.upgrade',
     icon: <ArrowsIcon />,
     link: '/upgrade',
   },
   {
-    label: 'Профиль',
+    label: 'menu.profile',
     icon: <ProfileIcon />,
     link: '/profile',
   },

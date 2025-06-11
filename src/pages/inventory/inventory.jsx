@@ -7,8 +7,10 @@ import { inventory } from '../../shared/constants/inventory'
 import Card from '../../shared/ui/card/card'
 import Button from '../../shared/ui/button/button'
 import TGSAnimation from '../../shared/components/tgs-animation/tgs-animation'
+import { useTranslation } from 'react-i18next'
 
 export default function Inventory() {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -31,7 +33,7 @@ export default function Inventory() {
     <div>
       <div className={styles.header_container}>
         <BackBtn className={styles.back_btn} onClick={() => navigate(-1)} />
-        <h1>Инвентарь</h1>
+        <h1>{t('inventory.title')}</h1>
       </div>
       <div className={styles.inventory_container}>
         {inventory.map((item) => (
@@ -41,15 +43,15 @@ export default function Inventory() {
               autoplay={true}
               playonce={false}
               playbyclick={true}
-              key={`${item.id}-${location.key}`} // Force remount on navigation
+              key={`${item.id}-${location.key}`}
             />
             <h3 className={styles.inventory_item_title}>{item.title}</h3>
             <div className={styles.inventory_item_buttons}>
               <Button className={styles.button_left}>
-                Продать за {item.price} <StarIcon />
+                {t('inventory.sell_for')} {item.price} <StarIcon />
               </Button>
               <Button className={styles.button_right}>
-                Вывести за {item.price} <StarIcon />
+                {t('inventory.withdraw_for')} {item.price} <StarIcon />
               </Button>
             </div>
           </Card>

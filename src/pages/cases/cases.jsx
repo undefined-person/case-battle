@@ -4,18 +4,20 @@ import styles from './cases.module.scss'
 import { cases } from '../../shared/constants/cases'
 import Card from '../../shared/ui/card/card'
 import StarIcon from '../../shared/assets/icons/star.svg?react'
+import { useTranslation } from 'react-i18next'
 
 export default function Cases() {
+  const { t } = useTranslation()
   return (
     <div className={styles.cases_container}>
       <Button>
-        Подключить TON
+        {t('connect_to_wallet')}
         <TonIcon />
       </Button>
       <div className={styles.tabs}>
-        <button className={styles.tab}>Фильтр1</button>
-        <button className={styles.tab}>Фильтр2</button>
-        <button className={styles.tab}>Фильтр3</button>
+        <button className={styles.tab}>{t('cases.filters.filter_1')}</button>
+        <button className={styles.tab}>{t('cases.filters.filter_2')}</button>
+        <button className={styles.tab}>{t('cases.filters.filter_3')}</button>
       </div>
       <div className={styles.cases}>
         {cases.map((item) => (

@@ -1,0 +1,80 @@
+{
+  "profile": {
+    "title": "Your Name",
+    "userId": "User ID {{id}}",
+    "menu": {
+      "inventory": "Inventory",
+      "history": "History",
+      "upgrades": "Upgrades",
+      "promoCode": "Activate promo code",
+      "enterPromo": "Enter promo code",
+      "activate": "Activate"
+    },
+    "language": {
+      "select": "Select language"
+    }
+  },
+  "menu": {
+    "cases": "Cases",
+    "gifts": "Contests",
+    "partners": "Partners",
+    "upgrade": "Upgrade",
+    "profile": "Profile"
+  },
+  "gifts": {
+    "title": "Contests",
+    "filters": {
+      "free": "Free"
+    },
+    "everyday_gift": "Daily Giveaway",
+    "requirements": "Requirements",
+    "all_time": "all time",
+    "hour": "h",
+    "minute": "min",
+    "second": "sec",
+    "days": "d",
+    "participants": "Participants",
+    "participate": "Participate",
+    "previous_winners": "Previous Winners"
+  },
+  "partners": {
+    "title": "Partners",
+    "invite_title": "Invite friends -\nGet rewards!",
+    "invite_info": "Each invited friend = 100",
+    "invite_button": "Invite friend",
+    "promo_code_button": "Create promo code",
+    "promo_code_info": "Friend enters a promo code and spins the case. \n You get 100 stars after its replenishment.",
+    "invited_friends": "Invited friends"
+  },
+  "cases": {
+    "filters": {
+      "filter_1": "Filter 1",
+      "filter_2": "Filter 2",
+      "filter_3": "Filter 3"
+    }
+  },
+  "upgrade": {
+    "title": "Upgrade NFT",
+    "progress_title": "Select a gift for improvement",
+    "upgrade_button": "Upgrade",
+    "select_item": "Select your item",
+    "inventory": "Inventory",
+    "desired_gift": "Desired GIFT",
+    "quick_search": "Quick search",
+    "no_items": "You don't have items worth more than 100 Stars"
+  },
+  "inventory": {
+    "title": "Inventory",
+    "sell_for": "Sell for",
+    "withdraw_for": "Withdraw for"
+  },
+  "history": {
+    "title": "History",
+    "success": "Success",
+    "canceled": "Canceled",
+    "error": "Error"
+  },
+  "verified": "Verified",
+  "unverified": "Unverified",
+  "connect_to_wallet": "Connect to TON"
+}
