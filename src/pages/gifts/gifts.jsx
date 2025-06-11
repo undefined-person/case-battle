@@ -1,5 +1,4 @@
 import Button from '../../shared/ui/button/button'
-import Header from '../../shared/components/header/header'
 import Card from '../../shared/ui/card/card'
 import TonIcon from '../../shared/assets/icons/ton.svg?react'
 import PeopleIcon from '../../shared/assets/icons/people.svg?react'
@@ -10,7 +9,6 @@ import styles from './gifts.module.scss'
 export default function Gifts() {
   return (
     <div>
-      <Header />
       <h1 className={styles.gifts_title}>Конкурсы</h1>
       <div className={styles.gifts_filters}>
         <Button className={styles.gifts_filters_button}>Бесплатные (2)</Button>

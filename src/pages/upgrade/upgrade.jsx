@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react'
-import Header from '../../shared/components/header/header'
 import Button from '../../shared/ui/button/button'
 import Card from '../../shared/ui/card/card'
 import styles from './upgrade.module.scss'
@@ -26,7 +25,6 @@ export default function Upgrade() {
 
   return (
     <div>
-      <Header />
       <h1 className={styles.upgrade_title}>Апгрейд NFT</h1>
       <div className={styles.progress_container}>
         <div className={styles.progress_background} />

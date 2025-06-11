@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import Header from '../../shared/components/header/header'
 import BackBtn from '../../shared/components/back-btn/back-btn'
 import { useNavigate, useLocation } from 'react-router'
 import styles from './inventory.module.scss'
@@ -30,7 +29,6 @@ export default function Inventory() {
 
   return (
     <div>
-      <Header />
       <div className={styles.header_container}>
         <BackBtn className={styles.back_btn} onClick={() => navigate(-1)} />
         <h1>Инвентарь</h1>

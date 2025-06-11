@@ -1,5 +1,9 @@
 @use '../../shared/styles/colors.scss' as colors;
 
+.cases_container {
+  margin-top: 32px;
+}
+
 .tabs {
   display: flex;
   gap: 8px;

@@ -34,7 +34,6 @@ export default function Profile() {
 
   return (
     <div>
-      <Header />
       <div className={styles.profile_container}>
         <img src={Avatar} alt="avatar" className={styles.profile_avatar} />
         <div className={styles.profile_info}>

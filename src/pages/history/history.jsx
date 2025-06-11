@@ -1,4 +1,3 @@
-import Header from '../../shared/components/header/header'
 import BackBtn from '../../shared/components/back-btn/back-btn'
 import { useNavigate } from 'react-router'
 import styles from './history.module.scss'
@@ -15,7 +14,6 @@ export default function History() {
 
   return (
     <div>
-      <Header />
       <div className={styles.header_container}>
         <BackBtn className={styles.back_btn} onClick={() => navigate(-1)} />
         <h1>История</h1>

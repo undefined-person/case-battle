@@ -7,7 +7,7 @@ import StarIcon from '../../shared/assets/icons/star.svg?react'
 
 export default function Cases() {
   return (
-    <div>
+    <div className={styles.cases_container}>
       <Button>
         Подключить TON
         <TonIcon />

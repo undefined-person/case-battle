@@ -1,4 +1,3 @@
-import Header from '../../shared/components/header/header'
 import StarIcon from '../../shared/assets/icons/star.svg?react'
 import CopyIcon from '../../shared/assets/icons/copy.svg?react'
 import TicketIcon from '../../shared/assets/icons/ticket.svg?react'
@@ -11,7 +10,6 @@ import { partners } from '../../shared/constants/partners'
 export default function Partners() {
   return (
     <div>
-      <Header />
       <div className={styles.partners_container}>
         <p className={styles.partners_title}>
           Приглашай друзей - <br /> Получай награды!
