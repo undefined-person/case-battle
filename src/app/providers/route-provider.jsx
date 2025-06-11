@@ -4,6 +4,7 @@ import Cases from '../../pages/cases/cases'
 import Partners from '../../pages/partners/partners'
 import Gifts from '../../pages/gifts/gifts'
 import Upgrade from '../../pages/upgrade/upgrade'
+import Profile from '../../pages/profile/profile'
 
 const routes = [
   {
@@ -24,7 +25,7 @@ const routes = [
   },
   {
     path: '/profile',
-    element: <div>Profile</div>,
+    element: <Profile />,
   },
 ]
 

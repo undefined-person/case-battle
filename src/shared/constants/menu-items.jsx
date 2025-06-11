@@ -1,4 +1,4 @@
-import GiftIcon from '../assets/icons/gift.svg?react'
+import SparkleIcon from '../assets/icons/sparkle.svg?react'
 import PeopleIcon from '../assets/icons/people.svg?react'
 import CaseIcon from '../assets/icons/case.svg?react'
 import ArrowsIcon from '../assets/icons/arrows.svg?react'
@@ -7,7 +7,7 @@ import ProfileIcon from '../assets/icons/profile.svg?react'
 export const menuItems = [
   {
     label: 'Конкурсы',
-    icon: <GiftIcon />,
+    icon: <SparkleIcon />,
     link: '/gifts',
   },
   {

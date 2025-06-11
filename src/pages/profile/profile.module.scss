@@ -1,0 +1,119 @@
+@use '../../shared/styles/colors.scss' as colors;
+
+.profile_container {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile_avatar {
+  border-radius: 12px;
+  height: 88px;
+  width: 88px;
+}
+
+.profile_name {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.profile_id {
+  color: colors.$gray;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.menu_container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.menu_item {
+  background-color: colors.$blue-dark;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.promo_container {
+  background-color: colors.$blue-dark;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.promo_header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+
+  &.active {
+    svg {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.promo_input {
+  background-color: colors.$bg-menu;
+  border-radius: 8px;
+  padding: 14px;
+  color: #fff;
+  font-weight: 400;
+  width: 100%;
+  border-color: colors.$gray;
+  border-width: 0.5px;
+}
+
+.promo_content {
+  margin-top: 12px;
+}
+
+.promo_button {
+  border-radius: 8px;
+  margin-top: 12px;
+  font-weight: 400;
+}
+
+.language_container {
+  background-color: colors.$blue-dark;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.language_buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+
+  button {
+    width: max-content;
+    border-radius: 8px;
+    padding: 9px 12px;
+    color: #fff;
+    background-color: colors.$bg-menu;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .active {
+    background-color: colors.$blue-light;
+  }
+}
