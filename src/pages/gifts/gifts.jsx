@@ -57,8 +57,8 @@ export default function Gifts() {
                   x2="14.0588"
                   y2="-1.94112"
                   gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#F200FF" />
-                  <stop offset="1" stop-color="#910099" stop-opacity="0" />
+                  <stop stopColor="#F200FF" />
+                  <stop offset="1" stopColor="#910099" stopOpacity="0" />
                 </linearGradient>
               </defs>
             </svg>
@@ -82,8 +82,8 @@ export default function Gifts() {
                   x2="65.9412"
                   y2="81.9411"
                   gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#F200FF" />
-                  <stop offset="1" stop-color="#910099" stop-opacity="0" />
+                  <stop stopColor="#F200FF" />
+                  <stop offset="1" stopColor="#910099" stopOpacity="0" />
                 </linearGradient>
               </defs>
             </svg>
