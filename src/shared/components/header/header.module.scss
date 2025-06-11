@@ -1,0 +1,55 @@
+@use '../../styles/colors.scss' as colors;
+
+.balance_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.balance_button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: colors.$bg-menu;
+  border: none;
+  border-radius: 8px;
+  height: 36px;
+  font-family: 'SFProDisplaySemibold', sans-serif;
+  font-weight: 600;
+}
+
+.balance_info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  color: #fff;
+}
+
+.star {
+  color: colors.$yellow;
+}
+
+.plus {
+  color: #fff;
+  background-color: colors.$primary-color;
+  border-radius: 8px;
+  font-size: 24px;
+  height: 100%;
+  width: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user_info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+}

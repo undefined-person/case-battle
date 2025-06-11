@@ -1,0 +1,244 @@
+@use '../../shared/styles/colors.scss' as colors;
+
+.upgrade_title {
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 32px;
+}
+
+.progress_container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin: 32px auto;
+}
+
+.progress_circle {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.progress_circle_background {
+  fill: none;
+  stroke: #1a2544;
+  stroke-width: 16;
+}
+
+.progress_circle_middle {
+  fill: #1a2544;
+  stroke: none;
+}
+
+.progress_circle_progress {
+  fill: none;
+  stroke: colors.$primary-color;
+  stroke-width: 16;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.progress_text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 42px;
+  font-weight: 600;
+  color: #4ca2ff;
+}
+
+.tick_marks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.tick_mark {
+  position: absolute;
+  width: 1px;
+  height: 8px;
+  background-color: #444444;
+  transform-origin: 50% 83px;
+  left: 50%;
+  top: 55px;
+}
+
+.marker {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-bottom: 28px solid #4ca2ff;
+  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.5));
+  z-index: 101;
+  border-radius: 2px;
+}
+
+.progress_background {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #0f1629 0%, #1a2544 100%);
+}
+
+.multiplier_container {
+  display: flex;
+  gap: 2px;
+  margin-top: 24px;
+}
+
+.multiplier_button {
+  background-color: transparent;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  width: 100%;
+
+  &.active {
+    background-color: #3b82f6;
+    color: #fff;
+  }
+}
+
+.upgrade_button {
+  border-radius: 12px;
+  background-color: colors.$blue-light;
+  margin-top: 16px;
+}
+
+.items_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.item_slot {
+  background-color: colors.$bg-menu;
+  border-radius: 12px;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: colors.$gray;
+  border: 1px solid colors.$blue;
+  padding: 40px 16px 16px;
+}
+
+.plus_sign {
+  font-size: 40px;
+  color: #444;
+  font-weight: 400;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.item_slot_text {
+  color: #fff;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+.tabs_container {
+  display: flex;
+  gap: 0;
+  margin: 16px 0;
+  background: colors.$bg-menu;
+  padding: 4px;
+  border-radius: 32px;
+}
+
+.tab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 12px;
+  font-weight: 600;
+  border-radius: 32px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+
+  &.active {
+    background: colors.$blue-light;
+  }
+}
+
+.search_wrapper {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: url('../../shared/assets/icons/search.svg') no-repeat center;
+    background-size: contain;
+    opacity: 0.7;
+    z-index: 1;
+  }
+}
+
+.search_input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid colors.$blue-light;
+  padding: 16px 16px 16px 48px;
+  color: colors.$blue-light;
+  width: 100%;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: colors.$blue-light;
+    opacity: 0.7;
+  }
+
+  &:focus {
+    border-color: colors.$primary-color;
+  }
+}
+
+.no_items_message {
+  color: #666;
+  text-align: center;
+  font-size: 14px;
+  padding: 16px;
+  background: rgba(26, 37, 68, 0.5);
+  border-radius: 8px;
+  margin-top: 16px;
+}
+
+.inventory_button,
+.gift_button {
+  display: none;
+}
+
+.multiplier_title {
+  text-align: center;
+}

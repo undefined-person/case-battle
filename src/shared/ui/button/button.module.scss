@@ -1,7 +1,7 @@
 @use '../../styles/colors.scss' as colors;
 
 .button {
-  background-color: rgba(0, 122, 255, 0.7);
+  background-color: colors.$primary-color;
   color: #fff;
   padding: 10px 24px;
   border-radius: 50px;

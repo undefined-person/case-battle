@@ -1,6 +1,9 @@
 import { Routes, Route, BrowserRouter } from 'react-router'
 import MainLayout from '../../shared/layouts/main-layout'
-import Cases from '../../pages/cases'
+import Cases from '../../pages/cases/cases'
+import Partners from '../../pages/partners/partners'
+import Gifts from '../../pages/gifts/gifts'
+import Upgrade from '../../pages/upgrade/upgrade'
 
 const routes = [
   {
@@ -9,15 +12,15 @@ const routes = [
   },
   {
     path: '/partners',
-    element: <div>Partners</div>,
+    element: <Partners />,
   },
   {
     path: '/gifts',
-    element: <div>Gifts</div>,
+    element: <Gifts />,
   },
   {
     path: '/upgrade',
-    element: <div>Upgrade</div>,
+    element: <Upgrade />,
   },
   {
     path: '/profile',

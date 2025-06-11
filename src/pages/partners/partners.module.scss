@@ -1,0 +1,74 @@
+@use '../../shared/styles/colors.scss' as colors;
+
+.partners_container {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.partners_title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.partners_info {
+  color: colors.$gray;
+  margin-top: 16px;
+
+  svg {
+    color: colors.$yellow;
+  }
+}
+
+.partners_buttons_container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+
+.partners_button {
+  border-radius: 12px;
+}
+
+.partners_card {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.partners_card_title {
+  font-family: 'SFProDisplaySemibold', sans-serif;
+  font-size: 22px;
+}
+
+.partners_card_info {
+  color: colors.$gray;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.partners_item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  background-color: colors.$blue;
+  padding: 4px;
+  padding-right: 12px;
+  border-radius: 12px;
+
+  img {
+    width: 36px;
+  }
+}
+
+.partners_item_name {
+  font-size: 14px;
+}
+
+.partners_item_status {
+  margin-left: auto;
+  font-size: 12px;
+  color: colors.$gray;
+}

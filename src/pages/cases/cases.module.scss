@@ -1,4 +1,4 @@
-@use '../shared/styles/colors.scss' as colors;
+@use '../../shared/styles/colors.scss' as colors;
 
 .tabs {
   display: flex;
@@ -38,4 +38,12 @@
   align-items: center;
   gap: 8px;
   font-size: 18px;
+}
+
+.case_title {
+  font-size: 14px;
+}
+
+.case_star {
+  color: colors.$yellow;
 }
