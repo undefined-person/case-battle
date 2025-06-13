@@ -74,6 +74,13 @@
     "canceled": "Canceled",
     "error": "Error"
   },
+  "case": {
+    "open_for": "Open for",
+    "open_instantly_for": "Open instantly for",
+    "prizes": "Prizes",
+    "restart": "Open again",
+    "close": "Close"
+  },
   "verified": "Verified",
   "unverified": "Unverified",
   "connect_to_wallet": "Connect to TON"

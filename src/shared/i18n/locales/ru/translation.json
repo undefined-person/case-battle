@@ -74,6 +74,13 @@
     "canceled": "Отменено",
     "error": "Ошибка"
   },
+  "case": {
+    "open_for": "Открыть за",
+    "open_instantly_for": "Открыть моментально за",
+    "prizes": "Призы",
+    "restart": "Открыть ещё раз",
+    "close": "Закрыть"
+  },
   "verified": "Проверено",
   "unverified": "Непроверено",
   "connect_to_wallet": "Подключить TON"

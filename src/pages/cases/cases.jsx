@@ -1,4 +1,3 @@
-import Button from '../../shared/ui/button/button'
 import styles from './cases.module.scss'
 import { cases } from '../../shared/constants/cases'
 import Card from '../../shared/ui/card/card'

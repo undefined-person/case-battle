@@ -17,6 +17,7 @@
 
   svg {
     color: colors.$yellow;
+    filter: drop-shadow(0 0 8px #ff9d00) drop-shadow(0 0 24px #ff9d00);
   }
 }
 

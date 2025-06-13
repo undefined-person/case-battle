@@ -8,6 +8,7 @@ import Watch from '../../shared/assets/images/prizes/watch.png'
 import Cap from '../../shared/assets/images/prizes/cap.png'
 import Header from '../../shared/components/header/header'
 import Menu from '../../shared/components/menu/menu'
+import { useTranslation } from 'react-i18next'
 
 const mockCase = {
   items: [
@@ -51,6 +52,8 @@ const Case = () => {
   const markerRef = useRef(null)
   const [itemWidth, setItemWidth] = useState(itemWidthPx)
   const [paddingOffset, setPaddingOffset] = useState(0)
+
+  const { t } = useTranslation()
 
   const generateItems = () => {
     let arr = []
@@ -158,10 +161,10 @@ const Case = () => {
       {!winningItem && !showRestart && (
         <div className={styles.buttons}>
           <Button onClick={handleOpen} disabled={isSpinning}>
-            Открыть за 100 <StarIcon />
+            {t('case.open_for')} 100 <StarIcon />
           </Button>
           <Button variant="outline" onClick={handleInstantOpen} disabled={isOpening}>
-            Открыть моментально за 100 <StarIcon />
+            {t('case.open_instantly_for')} 100 <StarIcon />
           </Button>
         </div>
       )}
@@ -180,19 +183,19 @@ const Case = () => {
                 <span>{winningItem.price ?? winningItem.id}</span>
               </div>
             </div>
-            <button onClick={handleCloseWinning}>Закрыть</button>
+            <button onClick={handleCloseWinning}>{t('case.close')}</button>
           </motion.div>
         )}
       </AnimatePresence>
       {showRestart && !winningItem && (
         <>
           <div className={styles.buttons}>
-            <Button onClick={handleRestart}>Открыть ещё раз</Button>
+            <Button onClick={handleRestart}>{t('case.restart')}</Button>
           </div>
         </>
       )}
       <div className={styles.prizes_section}>
-        <h2>Призы</h2>
+        <h2>{t('case.prizes')}</h2>
         <div className={styles.prizes_grid}>
           {mockCase.prizes.map((prize) => (
             <div key={prize.id} className={`${styles.prize_card} ${styles[prize.gradient]}`}>

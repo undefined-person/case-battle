@@ -12,18 +12,20 @@
   gap: 8px;
   position: relative;
   width: 100%;
+  padding-bottom: 140px;
 }
 
 .stars {
   display: flex;
   align-items: center;
   gap: 4px;
-  color: #ffd700;
+  color: colors.$yellow;
   font-weight: 500;
 
   svg {
     width: 20px;
     height: 20px;
+    filter: drop-shadow(0 0 8px #ff9d00) drop-shadow(0 0 24px #ff9d00);
   }
 }
 
@@ -195,7 +197,8 @@
     svg {
       width: 20px;
       height: 20px;
-      color: #ffd700;
+      color: colors.$yellow;
+      filter: drop-shadow(0 0 8px #ff9d00) drop-shadow(0 0 24px #ff9d00);
     }
   }
 }
