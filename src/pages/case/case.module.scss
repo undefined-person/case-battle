@@ -58,7 +58,7 @@
   background: #0a1935;
   width: 100%;
   margin: 0 auto;
-  min-height: 156px;
+  padding-top: 10px;
 }
 
 .items_line {
@@ -212,11 +212,11 @@
 .marker {
   width: 0;
   height: 0;
-  border-left: 18px solid transparent;
-  border-right: 18px solid transparent;
-  border-top: 18px solid #207cff;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-top: 24px solid #207cff;
   margin: 0 auto;
-  filter: none;
+  border-radius: 4px;
 }
 
 .marker_line {
