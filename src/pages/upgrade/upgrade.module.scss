@@ -85,21 +85,6 @@
   top: 55px;
 }
 
-.marker {
-  position: absolute;
-  top: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-bottom: 28px solid #4ca2ff;
-  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.5));
-  z-index: 101;
-  border-radius: 2px;
-}
-
 .progress_background {
   position: absolute;
   top: 14px;

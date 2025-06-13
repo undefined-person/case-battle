@@ -46,7 +46,6 @@ export default function Profile() {
           <p className={styles.profile_id}>{t('profile.userId', { id: '1803167' })}</p>
         </div>
       </div>
-
       <div className={styles.menu_container}>
         {menuItems.map((item) => (
           <div key={item.label} className={styles.menu_item} onClick={() => navigate(item.link)}>

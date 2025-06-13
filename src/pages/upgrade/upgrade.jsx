@@ -78,6 +78,9 @@ export default function Upgrade() {
             `}
             fill="#4ca2ff"
             filter="drop-shadow(0 0 8px #4ca2ff88)"
+            stroke="#4ca2ff"
+            strokeWidth="4"
+            strokeLinejoin="round"
           />
         </svg>
         <div className={styles.tick_marks}>{tickMarks}</div>

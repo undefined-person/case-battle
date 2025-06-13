@@ -80,6 +80,10 @@
   width: 100%;
   border-color: colors.$gray;
   border-width: 0.5px;
+
+  &::placeholder {
+    text-align: center;
+  }
 }
 
 .promo_content {
@@ -90,6 +94,7 @@
   border-radius: 8px;
   margin-top: 12px;
   font-weight: 400;
+  font-size: 14px;
 }
 
 .language_container {
