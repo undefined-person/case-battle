@@ -55,12 +55,9 @@
   position: relative;
   height: 148px;
   overflow: hidden;
-  border-top: 2px solid #007aff;
-  border-bottom: 2px solid #007aff;
   background: #0a1935;
   width: 100%;
   margin: 0 auto;
-  padding: 13px 16.665%;
   min-height: 156px;
 }
 
@@ -72,20 +69,22 @@
 }
 
 .item_card {
-  flex: 0 0 33.33%;
-  min-width: 33.33%;
+  flex: 0 0 auto;
+  min-width: unset;
+  max-width: unset;
+  width: unset;
   height: 124px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-  border-radius: 16px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: flex-start;
   padding: 12px 8px;
   position: relative;
   transition: transform 0.2s;
   box-sizing: border-box;
   margin: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.1) 100%);
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.1), 0 0 0 2px rgba(255, 255, 255, 0.1);
 
   img {
     width: 72px;
@@ -125,18 +124,78 @@
   }
 
   &.pepe {
-    background: radial-gradient(circle at 85% 85%, #a800ff 0%, #2b174a 50%, transparent 80%),
-      linear-gradient(120deg, #18192a 40%, transparent 80%), linear-gradient(180deg, #18192a 0%, transparent 60%);
+    background: hsla(233, 41%, 17%, 1);
+
+    background: linear-gradient(
+      135deg,
+      hsla(233, 41%, 17%, 1) 0%,
+      hsla(267, 54%, 21%, 1) 55%,
+      hsla(292, 87%, 37%, 1) 100%
+    );
+
+    background: -moz-linear-gradient(
+      135deg,
+      hsla(233, 41%, 17%, 1) 0%,
+      hsla(267, 54%, 21%, 1) 55%,
+      hsla(292, 87%, 37%, 1) 100%
+    );
+
+    background: -webkit-linear-gradient(
+      135deg,
+      hsla(233, 41%, 17%, 1) 0%,
+      hsla(267, 54%, 21%, 1) 55%,
+      hsla(292, 87%, 37%, 1) 100%
+    );
   }
 
   &.watch {
-    background: radial-gradient(circle at 85% 85%, #ffe259 0%, #b48a2d 50%, transparent 80%),
-      linear-gradient(120deg, #18192a 40%, transparent 80%), linear-gradient(180deg, #18192a 0%, transparent 60%);
+    background: hsla(233, 41%, 17%, 1);
+
+    background: linear-gradient(
+      135deg,
+      hsla(233, 41%, 17%, 1) 0%,
+      hsla(28, 13%, 22%, 1) 55%,
+      hsla(43, 74%, 36%, 1) 100%
+    );
+
+    background: -moz-linear-gradient(
+      135deg,
+      hsla(233, 41%, 17%, 1) 0%,
+      hsla(28, 13%, 22%, 1) 55%,
+      hsla(43, 74%, 36%, 1) 100%
+    );
+
+    background: -webkit-linear-gradient(
+      135deg,
+      hsla(233, 41%, 17%, 1) 0%,
+      hsla(28, 13%, 22%, 1) 55%,
+      hsla(43, 74%, 36%, 1) 100%
+    );
   }
 
   &.cap {
-    background: radial-gradient(circle at 85% 85%, #00ff85 0%, #0a3c1a 50%, transparent 80%),
-      linear-gradient(120deg, #18192a 40%, transparent 80%), linear-gradient(180deg, #18192a 0%, transparent 60%);
+    background: hsla(233, 41%, 17%, 1);
+
+    background: linear-gradient(
+      135deg,
+      hsla(233, 41%, 17%, 1) 0%,
+      hsla(160, 51%, 17%, 1) 55%,
+      hsla(126, 88%, 34%, 1) 100%
+    );
+
+    background: -moz-linear-gradient(
+      135deg,
+      hsla(233, 41%, 17%, 1) 0%,
+      hsla(160, 51%, 17%, 1) 55%,
+      hsla(126, 88%, 34%, 1) 100%
+    );
+
+    background: -webkit-linear-gradient(
+      135deg,
+      hsla(233, 41%, 17%, 1) 0%,
+      hsla(160, 51%, 17%, 1) 55%,
+      hsla(126, 88%, 34%, 1) 100%
+    );
   }
 }
 
@@ -153,12 +212,11 @@
 .marker {
   width: 0;
   height: 0;
-  border-left: 12px solid transparent;
-  border-right: 12px solid transparent;
-  border-bottom: 12px solid transparent;
-  border-top: 12px solid #007aff;
-  filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.5));
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 18px solid #207cff;
   margin: 0 auto;
+  filter: none;
 }
 
 .marker_line {
@@ -273,10 +331,32 @@
   z-index: 1000;
   padding: 24px;
 
-  .item_card {
-    flex: 0;
-    height: 200px;
+  .winning_item_card {
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    width: 100%;
+    background-color: colors.$bg-menu;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 16px;
+  }
+
+  .winning_item_image {
     width: 150px;
+    height: 150px;
+    object-fit: contain;
+  }
+
+  .item_name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-top: 0;
+    line-height: 1.1;
   }
 
   .item_price {
@@ -296,6 +376,7 @@
     width: 20px;
     height: 20px;
     color: colors.$yellow;
+    filter: drop-shadow(0 0 8px #ff9d00) drop-shadow(0 0 24px #ff9d00);
   }
 
   button {
@@ -304,11 +385,27 @@
     padding: 16px;
     border-radius: 12px;
     font-size: 16px;
-    background-color: #007aff;
     color: white;
-    border: none;
     cursor: pointer;
   }
+}
+
+.winning_item_buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.spin_again_button {
+  background-color: transparent;
+  border: 2px solid #007aff;
+  color: #007aff;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 16px;
+  border-radius: 12px;
 }
 
 @keyframes spin {

@@ -12,15 +12,15 @@ import { useTranslation } from 'react-i18next'
 
 const mockCase = {
   items: [
-    { id: 896, name: 'Plush Pepe', image: Pepe, gradient: 'pepe' },
-    { id: 897, name: 'Swiss Watch', image: Watch, gradient: 'watch' },
-    { id: 898, name: "Durov's Cap", image: Cap, gradient: 'cap' },
-    { id: 111, name: 'Swiss Watch', image: Watch, gradient: 'watch' },
-    { id: 222, name: 'Plush Pepe', image: Pepe, gradient: 'pepe' },
-    { id: 33, name: "Durov's Cap", image: Cap, gradient: 'cap' },
-    { id: 44, name: 'Swiss Watch', image: Watch, gradient: 'watch' },
-    { id: 55, name: 'Plush Pepe', image: Pepe, gradient: 'pepe' },
-    { id: 66, name: "Durov's Cap", image: Cap, gradient: 'cap' },
+    { id: 896, name: 'Plush Pepe', image: Pepe, gradient: 'pepe', price: 100 },
+    { id: 897, name: 'Swiss Watch', image: Watch, gradient: 'watch', price: 100 },
+    { id: 898, name: "Durov's Cap", image: Cap, gradient: 'cap', price: 100 },
+    { id: 111, name: 'Swiss Watch', image: Watch, gradient: 'watch', price: 100 },
+    { id: 222, name: 'Plush Pepe', image: Pepe, gradient: 'pepe', price: 100 },
+    { id: 33, name: "Durov's Cap", image: Cap, gradient: 'cap', price: 100 },
+    { id: 44, name: 'Swiss Watch', image: Watch, gradient: 'watch', price: 100 },
+    { id: 55, name: 'Plush Pepe', image: Pepe, gradient: 'pepe', price: 100 },
+    { id: 66, name: "Durov's Cap", image: Cap, gradient: 'cap', price: 100 },
   ],
   prizes: [
     { id: 1, name: 'Plush Pepe', image: Pepe, stars: 400, gradient: 'pepe' },
@@ -30,28 +30,25 @@ const mockCase = {
 }
 
 const totalItems = 50
-const visibleCount = 21
-const shift = Math.floor(visibleCount / 2)
-const gapPx = 8
-const clones = 2
+const shift = 1
 const itemWidthPx = 120
 
-function getInitialX(itemWidth, gapPx, clones, paddingOffset) {
-  return -((itemWidth + gapPx) * clones) + paddingOffset
+function getCenterX(itemWidth, index, containerWidth) {
+  return -(itemWidth * index) + containerWidth / 2 - itemWidth / 2
 }
 
 const Case = () => {
   const [items, setItems] = useState([])
   const [x, setX] = useState(0)
   const [winningItem, setWinningItem] = useState(null)
-  const [showRestart, setShowRestart] = useState(false)
   const [isSpinning, setIsSpinning] = useState(false)
   const [isOpening, setIsOpening] = useState(false)
   const scrollRef = useRef(null)
   const lineRef = useRef(null)
   const markerRef = useRef(null)
   const [itemWidth, setItemWidth] = useState(itemWidthPx)
-  const [paddingOffset, setPaddingOffset] = useState(0)
+  const [rouletteKey, setRouletteKey] = useState(Date.now())
+  const [shouldAnimate, setShouldAnimate] = useState(true)
 
   const { t } = useTranslation()
 
@@ -63,30 +60,62 @@ const Case = () => {
     return arr.slice(0, totalItems)
   }
 
-  useEffect(() => {
-    setItems(generateItems())
+  const resetRoulette = () => {
+    setShouldAnimate(false)
+    setRouletteKey(Date.now())
+    const newItems = generateItems()
+    setItems(newItems)
     setWinningItem(null)
     setIsSpinning(false)
     setIsOpening(false)
-    if (scrollRef.current) {
-      setItemWidth(scrollRef.current.offsetWidth / 3)
-      setPaddingOffset(scrollRef.current.offsetWidth * 0.16665)
-    }
-    setX(getInitialX(itemWidth, gapPx, clones, paddingOffset))
-    // eslint-disable-next-line
-  }, [showRestart])
+  }
 
-  const extendedItems = [...items.slice(-clones), ...items, ...items.slice(0, clones)]
+  useEffect(() => {
+    resetRoulette()
+    // eslint-disable-next-line
+  }, [])
+
+  useEffect(() => {
+    function handleResize() {
+      if (scrollRef.current) {
+        const width = scrollRef.current.offsetWidth
+        setItemWidth(width / 3)
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    handleResize()
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      const width = scrollRef.current.offsetWidth
+      setItemWidth(width / 3)
+    }
+  }, [x])
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      const width = scrollRef.current.offsetWidth
+      setItemWidth(width / 3)
+      setX(getCenterX(width / 3, 1, width))
+      setTimeout(() => setShouldAnimate(true), 0)
+    }
+  }, [rouletteKey])
+
+  const extendedItems = items
 
   const handleOpen = () => {
     if (isSpinning || items.length !== totalItems) return
-    const minIndex = Math.max(15, shift)
+    const minIndex = Math.max(20, shift)
     const maxIndex = totalItems - shift - 1
     const randomWinIndex = Math.floor(Math.random() * (maxIndex - minIndex + 1)) + minIndex
     setIsSpinning(true)
     setWinningItem(null)
     setTimeout(() => {
-      setX(-((itemWidth + gapPx) * randomWinIndex) + paddingOffset)
+      if (scrollRef.current) {
+        setX(getCenterX(itemWidth, randomWinIndex, scrollRef.current.offsetWidth))
+      }
       setTimeout(() => {
         setIsSpinning(false)
         if (lineRef.current && markerRef.current) {
@@ -107,7 +136,7 @@ const Case = () => {
           const winning = extendedItems[winner]
           setWinningItem(winning)
         }
-      }, 6000)
+      }, 10000)
     }, 50)
   }
 
@@ -120,12 +149,7 @@ const Case = () => {
   }
 
   const handleCloseWinning = () => {
-    setWinningItem(null)
-    setShowRestart(true)
-  }
-
-  const handleRestart = () => {
-    setShowRestart(false)
+    resetRoulette()
   }
 
   if (!items.length) return <div>Loading...</div>
@@ -133,15 +157,16 @@ const Case = () => {
   return (
     <div className={styles.container}>
       <Header className={styles.header} />
-      {!winningItem && !showRestart && (
-        <div className={styles.roulette_wrapper}>
+      {!winningItem && (
+        <div key={rouletteKey} className={styles.roulette_wrapper}>
           <div className={styles.items_scroll} ref={scrollRef}>
             <motion.div
+              key={rouletteKey}
               className={styles.items_line}
               ref={lineRef}
-              initial={false}
+              initial={{ x }}
               animate={{ x }}
-              transition={{ duration: 6, ease: [0.22, 1, 0.36, 1] }}>
+              transition={{ duration: shouldAnimate ? 10 : 0, ease: [0.05, 0.7, 0.1, 1] }}>
               {extendedItems.map((item, idx) => (
                 <div key={idx} className={`${styles.item_card} ${styles[item.gradient]}`} style={{ width: itemWidth }}>
                   <div>
@@ -158,7 +183,7 @@ const Case = () => {
           </div>
         </div>
       )}
-      {!winningItem && !showRestart && (
+      {!winningItem && (
         <div className={styles.buttons}>
           <Button onClick={handleOpen} disabled={isSpinning}>
             {t('case.open_for')} 100 <StarIcon />
@@ -175,25 +200,21 @@ const Case = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}>
-            <div className={`${styles.item_card} ${styles[winningItem.gradient]}`}>
+            <div className={styles.winning_item_card}>
               <span className={styles.item_name}>{winningItem.name}</span>
-              <img src={winningItem.image} alt={winningItem.name} />
-              <div className={styles.item_price}>
-                <StarIcon />
-                <span>{winningItem.price ?? winningItem.id}</span>
+              <img src={winningItem.image} alt={winningItem.name} className={styles.winning_item_image} />
+              <div className={styles.winning_item_buttons}>
+                <Button>
+                  {t('inventory.sell_for')} {winningItem.price} <StarIcon />
+                </Button>
+                <Button className={styles.spin_again_button} onClick={handleCloseWinning}>
+                  {t('case.spin_again')}
+                </Button>
               </div>
             </div>
-            <button onClick={handleCloseWinning}>{t('case.close')}</button>
           </motion.div>
         )}
       </AnimatePresence>
-      {showRestart && !winningItem && (
-        <>
-          <div className={styles.buttons}>
-            <Button onClick={handleRestart}>{t('case.restart')}</Button>
-          </div>
-        </>
-      )}
       <div className={styles.prizes_section}>
         <h2>{t('case.prizes')}</h2>
         <div className={styles.prizes_grid}>
