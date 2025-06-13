@@ -199,11 +199,12 @@ const Case = () => {
         <div className={styles.prizes_grid}>
           {mockCase.prizes.map((prize) => (
             <div key={prize.id} className={`${styles.prize_card} ${styles[prize.gradient]}`}>
-              <img src={prize.image} alt="Prize" />
-              <div className={styles.prize_stars}>
+              <div className={styles.prize_price}>
                 <StarIcon />
                 <span>{prize.stars}</span>
               </div>
+              <img src={prize.image} alt="Prize" />
+              <h3 className={styles.prize_name}>{prize.name}</h3>
             </div>
           ))}
         </div>

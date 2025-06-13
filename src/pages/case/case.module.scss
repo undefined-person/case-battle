@@ -19,12 +19,13 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  color: colors.$yellow;
+
   font-weight: 500;
 
   svg {
     width: 20px;
     height: 20px;
+    color: colors.$yellow;
     filter: drop-shadow(0 0 8px #ff9d00) drop-shadow(0 0 24px #ff9d00);
   }
 }
@@ -227,57 +228,35 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  position: relative;
+  padding-top: 26px;
 
   img {
     width: 114px;
     height: 114px;
     object-fit: contain;
   }
-}
 
-.prize_stars {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: #ffd700;
-  font-weight: 500;
+  .prize_price {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(71, 106, 212, 0.1);
+    border-radius: 12px;
+    padding: 4px 12px 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    z-index: 2;
 
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-.bottom_nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #1a1b23;
-  display: flex;
-  justify-content: space-around;
-  padding: 12px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.nav_item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  background: none;
-  border: none;
-  color: #6b7280;
-  font-size: 12px;
-  cursor: pointer;
-
-  &:hover,
-  &.active {
-    color: #007aff;
-  }
-
-  .icon {
-    font-size: 24px;
+    svg {
+      color: colors.$yellow;
+      width: 22px;
+      height: 22px;
+      filter: drop-shadow(0 0 8px #ff9d00) drop-shadow(0 0 24px #ff9d00);
+    }
   }
 }
 
