@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import BackBtn from '../../shared/components/back-btn/back-btn'
 import { useNavigate, useLocation } from 'react-router'
 import styles from './inventory.module.scss'
 import StarIcon from '../../shared/assets/icons/star.svg?react'
-import { inventory } from '../../shared/constants/inventory'
+import { inventory as inventoryData } from '../../shared/constants/inventory'
 import Card from '../../shared/ui/card/card'
 import Button from '../../shared/ui/button/button'
 import TGSAnimation from '../../shared/components/tgs-animation/tgs-animation'
@@ -13,6 +13,7 @@ export default function Inventory() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
+  const [inventory, setInventory] = useState(inventoryData)
 
   useEffect(() => {
     return () => {
@@ -28,6 +29,10 @@ export default function Inventory() {
       window.lottie?.destroy()
     }
   }, [location])
+
+  const removeItem = (id) => {
+    setInventory(inventory.filter((item) => item.id !== id))
+  }
 
   return (
     <div>
@@ -47,10 +52,10 @@ export default function Inventory() {
             />
             <h3 className={styles.inventory_item_title}>{item.title}</h3>
             <div className={styles.inventory_item_buttons}>
-              <Button>
+              <Button onClick={() => removeItem(item.id)}>
                 {t('inventory.sell_for')} {item.price} <StarIcon />
               </Button>
-              <Button>
+              <Button onClick={() => removeItem(item.id)}>
                 {t('inventory.withdraw_for')} {item.price} <StarIcon />
               </Button>
             </div>
