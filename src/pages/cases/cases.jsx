@@ -1,5 +1,4 @@
 import Button from '../../shared/ui/button/button'
-import TonIcon from '../../shared/assets/icons/ton.svg?react'
 import styles from './cases.module.scss'
 import { cases } from '../../shared/constants/cases'
 import Card from '../../shared/ui/card/card'
@@ -11,10 +10,6 @@ export default function Cases() {
   const { t } = useTranslation()
   return (
     <div className={styles.cases_container}>
-      <Button>
-        {t('connect_to_wallet')}
-        <TonIcon />
-      </Button>
       <div className={styles.tabs}>
         <button className={styles.tab}>{t('cases.filters.filter_1')}</button>
         <button className={styles.tab}>{t('cases.filters.filter_2')}</button>

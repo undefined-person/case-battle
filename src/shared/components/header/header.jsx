@@ -3,12 +3,14 @@ import StarIcon from '../../assets/icons/star.svg?react'
 
 import styles from './header.module.scss'
 import { useTranslation } from 'react-i18next'
+import Button from '../../ui/button/button'
+import TonIcon from '../../assets/icons/ton.svg?react'
 
 export default function Header({ className }) {
   const { t } = useTranslation()
   return (
     <header className={className}>
-      <div className={styles.balance_container}>
+      {/* <div className={styles.balance_container}>
         <div className={styles.user_info}>
           <img src={Avatar} alt="avatar" className={styles.avatar} />
           <h3>{t('profile.title')}</h3>
@@ -20,7 +22,11 @@ export default function Header({ className }) {
           </div>
           <span className={styles.plus}>+</span>
         </button>
-      </div>
+      </div> */}
+      <Button>
+        {t('connect_to_wallet')}
+        <TonIcon />
+      </Button>
     </header>
   )
 }
