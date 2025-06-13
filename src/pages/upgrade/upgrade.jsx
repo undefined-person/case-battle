@@ -7,7 +7,7 @@ import { animate } from 'motion/react'
 
 const MULTIPLIERS = ['x1.5', 'x2', 'x3', 'x5', 'x10', 'x20']
 const TICK_COUNT = 24
-const percentage = 36
+const BASE_PERCENTAGE = 36
 
 export default function Upgrade() {
   const { t } = useTranslation()
@@ -18,6 +18,18 @@ export default function Upgrade() {
   const radius = 95
   const innerRadius = 75
   const circumference = 2 * Math.PI * radius
+
+  const getMultiplierValue = (multiplier) => {
+    return parseFloat(multiplier.replace('x', ''))
+  }
+
+  const calculatePercentage = () => {
+    const multiplierValue = getMultiplierValue(selectedMultiplier)
+    // Decrease percentage as multiplier increases
+    return Math.round(BASE_PERCENTAGE / multiplierValue)
+  }
+
+  const percentage = calculatePercentage()
   const strokeDashoffset = circumference - (percentage / 100) * circumference
 
   const tickMarks = useMemo(() => {
@@ -43,12 +55,22 @@ export default function Upgrade() {
   const base2Y = cy + innerRadius * Math.sin(rad - baseAngle)
 
   const startUpgrade = () => {
-    const randomOffset = Math.random() * 360
-    const targetAngle = randomOffset
+    // Normalize current angle to 0-360 range
+    const normalizedCurrentAngle = ((markerAngle % 360) + 360) % 360
+
+    // Calculate target angle ensuring clockwise rotation
+    // Add 360 (full rotation) plus random angle
+    const targetAngle = normalizedCurrentAngle + 360 + Math.random() * 360
+
+    // Animate from current angle to target angle
     animate(markerAngle, targetAngle, {
       duration: 2,
       ease: 'easeInOut',
-      onUpdate: (latest) => setMarkerAngle(latest),
+      onUpdate: (latest) => {
+        // Ensure the angle is always increasing (clockwise)
+        const newAngle = latest % 360
+        setMarkerAngle(newAngle)
+      },
     })
   }
 
@@ -84,7 +106,7 @@ export default function Upgrade() {
           />
         </svg>
         <div className={styles.tick_marks}>{tickMarks}</div>
-        <div className={styles.progress_text}>36%</div>
+        <div className={styles.progress_text}>{percentage}%</div>
       </div>
       <div>
         <h2 className={styles.multiplier_title}>{t('upgrade.progress_title')}</h2>
