@@ -47,10 +47,10 @@ export default function Inventory() {
             />
             <h3 className={styles.inventory_item_title}>{item.title}</h3>
             <div className={styles.inventory_item_buttons}>
-              <Button className={styles.button_left}>
+              <Button>
                 {t('inventory.sell_for')} {item.price} <StarIcon />
               </Button>
-              <Button className={styles.button_right}>
+              <Button>
                 {t('inventory.withdraw_for')} {item.price} <StarIcon />
               </Button>
             </div>

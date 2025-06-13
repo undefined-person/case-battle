@@ -4,10 +4,10 @@ import StarIcon from '../../assets/icons/star.svg?react'
 import styles from './header.module.scss'
 import { useTranslation } from 'react-i18next'
 
-export default function Header() {
+export default function Header({ className }) {
   const { t } = useTranslation()
   return (
-    <header>
+    <header className={className}>
       <div className={styles.balance_container}>
         <div className={styles.user_info}>
           <img src={Avatar} alt="avatar" className={styles.avatar} />

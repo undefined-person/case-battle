@@ -1,0 +1,348 @@
+@use '../../shared/styles/colors.scss' as colors;
+
+.header {
+  padding: 16px;
+}
+
+.container {
+  min-height: 100vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  width: 100%;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffd700;
+  font-weight: 500;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.add_button {
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.roulette_wrapper {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.items_scroll {
+  position: relative;
+  height: 148px;
+  overflow: hidden;
+  border-top: 2px solid #007aff;
+  border-bottom: 2px solid #007aff;
+  background: #0a1935;
+  width: 100%;
+  margin: 0 auto;
+  padding: 13px 16.665%;
+  min-height: 156px;
+}
+
+.items_line {
+  display: flex;
+  gap: 8px;
+  position: relative;
+  will-change: transform;
+}
+
+.item_card {
+  flex: 0 0 33.33%;
+  min-width: 33.33%;
+  height: 124px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 8px;
+  position: relative;
+  transition: transform 0.2s;
+  box-sizing: border-box;
+  margin: 0;
+
+  img {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+  }
+
+  .item_name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    text-align: left;
+    margin-bottom: 6px;
+    margin-top: 0;
+    line-height: 1.1;
+  }
+
+  .item_price {
+    font-size: 12px;
+    font-weight: 600;
+    color: #888888;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-top: 0;
+    line-height: 1.1;
+  }
+
+  .item_image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+  }
+
+  &.pepe {
+    background: radial-gradient(circle at 85% 85%, #a800ff 0%, #2b174a 50%, transparent 80%),
+      linear-gradient(120deg, #18192a 40%, transparent 80%), linear-gradient(180deg, #18192a 0%, transparent 60%);
+  }
+
+  &.watch {
+    background: radial-gradient(circle at 85% 85%, #ffe259 0%, #b48a2d 50%, transparent 80%),
+      linear-gradient(120deg, #18192a 40%, transparent 80%), linear-gradient(180deg, #18192a 0%, transparent 60%);
+  }
+
+  &.cap {
+    background: radial-gradient(circle at 85% 85%, #00ff85 0%, #0a3c1a 50%, transparent 80%),
+      linear-gradient(120deg, #18192a 40%, transparent 80%), linear-gradient(180deg, #18192a 0%, transparent 60%);
+  }
+}
+
+.marker_container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 100;
+  pointer-events: none;
+  top: 0;
+}
+
+.marker {
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-top: 12px solid #007aff;
+  filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.5));
+  margin: 0 auto;
+}
+
+.marker_line {
+  width: 2px;
+  height: 100%;
+  background: #007aff;
+  margin: 0 auto;
+  box-shadow: 0 0 10px rgba(0, 122, 255, 0.5);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px;
+
+  button {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #007aff;
+    color: white;
+    border: none;
+    cursor: pointer;
+
+    &[variant='outline'] {
+      background-color: transparent;
+      border: 2px solid #007aff;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: #ffd700;
+    }
+  }
+}
+
+.prizes_section {
+  padding: 16px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+}
+
+.prizes_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.prize_card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  img {
+    width: 114px;
+    height: 114px;
+    object-fit: contain;
+  }
+}
+
+.prize_stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffd700;
+  font-weight: 500;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.bottom_nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1a1b23;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 12px;
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    color: #007aff;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+}
+
+.winning_popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 11, 20, 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  z-index: 1000;
+  padding: 24px;
+
+  .item_card {
+    flex: 0;
+    height: 200px;
+    width: 150px;
+  }
+
+  .item_price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    text-align: left;
+    margin-bottom: 10px;
+    margin-top: 0;
+    line-height: 1.1;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+    color: colors.$yellow;
+  }
+
+  button {
+    width: 100%;
+    max-width: 280px;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 16px;
+    background-color: #007aff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slowDown {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(calc(-100% + var(--final-position)));
+  }
+}
