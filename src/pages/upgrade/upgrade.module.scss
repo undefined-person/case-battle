@@ -12,6 +12,22 @@
   width: 280px;
   height: 280px;
   margin: 32px auto;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 340px;
+    height: 340px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, #4ca2ff 0%, rgba(76, 162, 255, 0.18) 60%, transparent 100%);
+    filter: blur(24px);
+    opacity: 0.4;
+    z-index: 0;
+    pointer-events: none;
+  }
 }
 
 .progress_circle {
@@ -241,4 +257,12 @@
 
 .multiplier_title {
   text-align: center;
+}
+
+.progress_circle_glow {
+  fill: #4ca2ff;
+  stroke: none;
+  opacity: 0.18;
+  filter: blur(32px);
+  pointer-events: none;
 }
