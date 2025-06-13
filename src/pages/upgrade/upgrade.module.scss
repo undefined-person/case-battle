@@ -140,7 +140,7 @@
   justify-content: space-between;
   color: colors.$gray;
   border: 1px solid colors.$blue;
-  padding: 40px 16px 16px;
+  padding: 20px 16px 16px;
 }
 
 .plus_sign {
@@ -250,4 +250,123 @@
   opacity: 0.18;
   filter: blur(32px);
   pointer-events: none;
+}
+
+.winning_popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 11, 20, 0.95);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.winning_item_card {
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  width: 100%;
+  max-width: 800px;
+  background-color: colors.$bg-menu;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 16px;
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+}
+
+.inventory_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 24px;
+  padding: 0 4px;
+}
+
+.inventory_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 8px;
+  background-color: colors.$blue-dark;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  picture {
+    width: 90px;
+    height: 90px;
+    position: relative;
+    display: block;
+    background-color: transparent;
+  }
+}
+
+.inventory_item_title {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.inventory_item_price {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: colors.$yellow;
+  margin-top: 2px;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    filter: drop-shadow(0 0 8px #ff9d00) drop-shadow(0 0 24px #ff9d00);
+  }
+}
+
+.spin_again_button {
+  width: 100%;
+  max-width: 280px;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  background-color: transparent;
+  border: 2px solid #007aff;
+  color: #007aff;
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .winning_item_card {
+    padding: 12px;
+    max-width: 98vw;
+  }
+  .inventory_grid {
+    gap: 10px;
+    padding: 0 2px;
+  }
+  .inventory_item {
+    padding: 10px 2px;
+    border-radius: 10px;
+  }
 }

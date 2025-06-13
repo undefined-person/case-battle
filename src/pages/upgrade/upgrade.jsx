@@ -4,6 +4,10 @@ import Card from '../../shared/ui/card/card'
 import styles from './upgrade.module.scss'
 import { useTranslation } from 'react-i18next'
 import { animate } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
+import { inventory as inventoryData } from '../../shared/constants/inventory'
+import TGSAnimation from '../../shared/components/tgs-animation/tgs-animation'
+import StarIcon from '../../shared/assets/icons/star.svg?react'
 
 const MULTIPLIERS = ['x1.5', 'x2', 'x3', 'x5', 'x10', 'x20']
 const TICK_COUNT = 24
@@ -14,6 +18,9 @@ export default function Upgrade() {
   const [markerAngle, setMarkerAngle] = useState(-90) // верхня точка
   const [selectedMultiplier, setSelectedMultiplier] = useState('x2')
   const [activeTab, setActiveTab] = useState('inventory')
+  const [selectedItems, setSelectedItems] = useState([null, null])
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [activeSlotIndex, setActiveSlotIndex] = useState(null)
 
   const radius = 95
   const innerRadius = 75
@@ -55,23 +62,35 @@ export default function Upgrade() {
   const base2Y = cy + innerRadius * Math.sin(rad - baseAngle)
 
   const startUpgrade = () => {
-    // Normalize current angle to 0-360 range
     const normalizedCurrentAngle = ((markerAngle % 360) + 360) % 360
 
-    // Calculate target angle ensuring clockwise rotation
-    // Add 360 (full rotation) plus random angle
     const targetAngle = normalizedCurrentAngle + 360 + Math.random() * 360
 
-    // Animate from current angle to target angle
     animate(markerAngle, targetAngle, {
       duration: 2,
       ease: 'easeInOut',
       onUpdate: (latest) => {
-        // Ensure the angle is always increasing (clockwise)
         const newAngle = latest % 360
         setMarkerAngle(newAngle)
       },
     })
+  }
+
+  const handleItemSlotClick = (index) => {
+    setActiveSlotIndex(index)
+    setIsModalOpen(true)
+  }
+
+  const handleItemSelect = (item) => {
+    const newSelectedItems = [...selectedItems]
+    newSelectedItems[activeSlotIndex] = item
+    setSelectedItems(newSelectedItems)
+    setIsModalOpen(false)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setActiveSlotIndex(null)
   }
 
   return (
@@ -125,14 +144,21 @@ export default function Upgrade() {
         {t('upgrade.upgrade_button')}
       </Button>
       <div className={styles.items_container}>
-        <div className={styles.item_slot}>
-          <div className={styles.plus_sign}>+</div>
-          <div className={styles.item_slot_text}>{t('upgrade.select_item')}</div>
-        </div>
-        <div className={styles.item_slot}>
-          <div className={styles.plus_sign}>+</div>
-          <div className={styles.item_slot_text}>{t('upgrade.select_item')}</div>
-        </div>
+        {selectedItems.map((item, index) => (
+          <Button key={index} className={styles.item_slot} onClick={() => handleItemSlotClick(index)}>
+            {item ? (
+              <>
+                <TGSAnimation src={item.image} autoplay={true} playonce={false} playbyclick={true} />
+                <div className={styles.item_slot_text}>{item.title}</div>
+              </>
+            ) : (
+              <>
+                <div className={styles.plus_sign}>+</div>
+                <div className={styles.item_slot_text}>{t('upgrade.select_item')}</div>
+              </>
+            )}
+          </Button>
+        ))}
       </div>
       <div className={styles.tabs_container}>
         <button
@@ -152,6 +178,34 @@ export default function Upgrade() {
         </div>
         <div className={styles.no_items_message}>{t('upgrade.no_items')}</div>
       </Card>
+
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            className={styles.winning_popup}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}>
+            <div className={styles.winning_item_card}>
+              <h2>{t('upgrade.select_item')}</h2>
+              <div className={styles.inventory_grid}>
+                {inventoryData.map((item) => (
+                  <div key={item.id} className={styles.inventory_item} onClick={() => handleItemSelect(item)}>
+                    <TGSAnimation src={item.image} autoplay={true} playonce={false} playbyclick={true} />
+                    <h3 className={styles.inventory_item_title}>{item.title}</h3>
+                    <div className={styles.inventory_item_price}>
+                      {item.price} <StarIcon />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <Button className={styles.spin_again_button} onClick={handleCloseModal}>
+                {t('case.close')}
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
