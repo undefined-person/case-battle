@@ -61,7 +61,11 @@
     "inventory": "Inventory",
     "desired_gift": "Desired GIFT",
     "quick_search": "Quick search",
-    "no_items": "You don't have items worth more than 100 Stars"
+    "no_items": "You don't have items worth more than 100 Stars",
+    "no_gift": "No gift found for this multiplier.",
+    "spinning": "Spinning...",
+    "lose": "Lose",
+    "win": "Win"
   },
   "inventory": {
     "title": "Inventory",

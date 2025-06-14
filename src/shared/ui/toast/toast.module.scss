@@ -1,0 +1,22 @@
+.toast_container {
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toast_card {
+  background: #1a2544;
+  color: #fff;
+  border-radius: 12px;
+  padding: 18px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+  min-width: 220px;
+  text-align: center;
+}

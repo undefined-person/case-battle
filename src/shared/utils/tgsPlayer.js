@@ -1,5 +1,9 @@
 import pako from 'pako'
 
+const CACHE_PREFIX = 'tgs-animation-'
+const CACHE_VERSION = '1.0'
+const MAX_CACHE_SIZE = 50
+
 export class TgsPlayer {
   constructor(container, options = {}) {
     this.container = container
@@ -22,25 +26,56 @@ export class TgsPlayer {
 
   async loadAnimation(src) {
     try {
-      const cacheKey = `tgs-animation-${src}`
+      const cacheKey = `${CACHE_PREFIX}${CACHE_VERSION}-${src}`
       const cached = sessionStorage.getItem(cacheKey)
 
       let animationData
 
       if (cached) {
-        animationData = JSON.parse(cached)
-      } else {
-        const response = await fetch(src)
-        const buffer = await response.arrayBuffer()
+        try {
+          animationData = JSON.parse(cached)
+        } catch (e) {
+          console.warn('Failed to parse cached animation data:', e)
+          sessionStorage.removeItem(cacheKey)
+        }
+      }
 
+      if (!animationData) {
+        const response = await fetch(src)
+        if (!response.ok) {
+          throw new Error(`Failed to fetch animation: ${response.statusText}`)
+        }
+
+        const buffer = await response.arrayBuffer()
         const inflated = pako.inflate(new Uint8Array(buffer))
         const decoded = new TextDecoder().decode(inflated)
         animationData = JSON.parse(decoded)
 
-        try {
-          sessionStorage.setItem(cacheKey, JSON.stringify(animationData))
-        } catch (e) {
-          console.warn('Failed to cache animation data:', e)
+        if (animationData) {
+          try {
+            // Clean up old cache entries if we're at the limit
+            const keys = Object.keys(sessionStorage)
+            const tgsKeys = keys.filter((key) => key.startsWith(CACHE_PREFIX))
+            if (tgsKeys.length >= MAX_CACHE_SIZE) {
+              const oldestKey = tgsKeys[0]
+              sessionStorage.removeItem(oldestKey)
+            }
+
+            sessionStorage.setItem(cacheKey, JSON.stringify(animationData))
+          } catch (e) {
+            console.warn('Failed to cache animation data:', e)
+            // If we hit storage limits, clear some old entries
+            const keys = Object.keys(sessionStorage)
+            const tgsKeys = keys.filter((key) => key.startsWith(CACHE_PREFIX))
+            if (tgsKeys.length > 0) {
+              sessionStorage.removeItem(tgsKeys[0])
+              try {
+                sessionStorage.setItem(cacheKey, JSON.stringify(animationData))
+              } catch (e2) {
+                console.warn('Failed to cache animation data after cleanup:', e2)
+              }
+            }
+          }
         }
       }
 
@@ -50,9 +85,7 @@ export class TgsPlayer {
         animationData.assets = animationData.assets || []
         animationData.ip = 0
         animationData.op = animationData.op || 60
-
         animationData.fr = 30
-
         animationData.ddd = 0
         animationData.sr = 1
         animationData.xt = 0
@@ -69,7 +102,6 @@ export class TgsPlayer {
   destroy() {
     if (this.ctx) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-
       this.ctx = null
     }
 

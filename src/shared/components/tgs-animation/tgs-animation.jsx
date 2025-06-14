@@ -1,11 +1,13 @@
-import { useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef, useCallback, memo } from 'react'
 import lottie from 'lottie-web'
 import { TgsPlayer } from '../../utils/tgsPlayer'
 import styles from './tgs-animation.module.scss'
 
 let activeAnimations = 0
+const MAX_ACTIVE_ANIMATIONS = 10
+const animationCache = new Map()
 
-export default function TGSAnimation({
+export default memo(function TGSAnimation({
   src,
   width = 114,
   height = 114,
@@ -16,10 +18,23 @@ export default function TGSAnimation({
   const containerRef = useRef(null)
   const playerRef = useRef(null)
   const animationRef = useRef(null)
+  const isVisibleRef = useRef(true)
 
   const handleClick = useCallback(() => {
-    if (animationRef.current) {
+    if (animationRef.current && isVisibleRef.current) {
       animationRef.current.goToAndPlay(0)
+    }
+  }, [])
+
+  const cleanupAnimation = useCallback(() => {
+    if (playerRef.current) {
+      playerRef.current.destroy()
+      playerRef.current = null
+    }
+    if (animationRef.current) {
+      animationRef.current.destroy()
+      animationRef.current = null
+      activeAnimations = Math.max(0, activeAnimations - 1)
     }
   }, [])
 
@@ -28,18 +43,11 @@ export default function TGSAnimation({
 
     const container = containerRef.current
     let isDestroyed = false
+    let cleanupInterval = null
 
     const loadAnimation = async () => {
       try {
-        if (playerRef.current) {
-          playerRef.current.destroy()
-          playerRef.current = null
-        }
-        if (animationRef.current) {
-          animationRef.current.destroy()
-          animationRef.current = null
-          activeAnimations = Math.max(0, activeAnimations - 1)
-        }
+        cleanupAnimation()
 
         const existingCanvas = container.querySelector('canvas')
         if (existingCanvas) {
@@ -49,11 +57,31 @@ export default function TGSAnimation({
 
         if (isDestroyed) return
 
-        playerRef.current = new TgsPlayer(container, { width, height })
+        // Check if animation is already cached
+        let animationData = animationCache.get(src)
 
-        const animationData = await playerRef.current.loadAnimation(src)
+        if (!animationData) {
+          playerRef.current = new TgsPlayer(container, { width, height })
+          animationData = await playerRef.current.loadAnimation(src)
+
+          if (animationData) {
+            // Cache the animation data
+            animationCache.set(src, animationData)
+          }
+        }
 
         if (animationData && containerRef.current && !isDestroyed) {
+          // If we have too many active animations, destroy the oldest one
+          if (activeAnimations >= MAX_ACTIVE_ANIMATIONS) {
+            const oldestAnimation = document.querySelector('.lottie-canvas')
+            if (oldestAnimation) {
+              const ctx = oldestAnimation.getContext('2d')
+              ctx?.clearRect(0, 0, oldestAnimation.width, oldestAnimation.height)
+              oldestAnimation.remove()
+            }
+            activeAnimations = Math.max(0, activeAnimations - 1)
+          }
+
           lottie.setQuality(2)
 
           activeAnimations++
@@ -61,7 +89,7 @@ export default function TGSAnimation({
             container: container,
             renderer: 'canvas',
             loop: !playonce,
-            autoplay: autoplay,
+            autoplay: autoplay && isVisibleRef.current,
             animationData: animationData,
             rendererSettings: {
               preserveAspectRatio: 'xMidYMid meet',
@@ -89,13 +117,11 @@ export default function TGSAnimation({
 
             // Add periodic cleanup for long-running animations
             if (!playonce) {
-              const cleanupInterval = setInterval(() => {
-                if (animationRef.current && !document.hidden && !isDestroyed) {
+              cleanupInterval = setInterval(() => {
+                if (animationRef.current && !document.hidden && !isDestroyed && isVisibleRef.current) {
                   animationRef.current.goToAndPlay(0, true)
                 }
               }, 60000)
-
-              return () => clearInterval(cleanupInterval)
             }
           }
 
@@ -113,20 +139,17 @@ export default function TGSAnimation({
 
     return () => {
       isDestroyed = true
+      isVisibleRef.current = false
+
+      if (cleanupInterval) {
+        clearInterval(cleanupInterval)
+      }
 
       if (playbyclick) {
         container.removeEventListener('click', handleClick)
       }
 
-      if (playerRef.current) {
-        playerRef.current.destroy()
-        playerRef.current = null
-      }
-      if (animationRef.current) {
-        animationRef.current.destroy()
-        animationRef.current = null
-        activeAnimations = Math.max(0, activeAnimations - 1)
-      }
+      cleanupAnimation()
 
       const existingCanvas = container.querySelector('canvas')
       if (existingCanvas) {
@@ -136,10 +159,11 @@ export default function TGSAnimation({
         }
       }
     }
-  }, [src, width, height, autoplay, playonce, playbyclick, handleClick])
+  }, [src, width, height, autoplay, playonce, playbyclick, handleClick, cleanupAnimation])
 
   useEffect(() => {
     const handleVisibilityChange = () => {
+      isVisibleRef.current = !document.hidden
       if (document.hidden && animationRef.current) {
         animationRef.current.pause()
       } else if (!document.hidden && animationRef.current && autoplay) {
@@ -165,4 +189,4 @@ export default function TGSAnimation({
       }}
     />
   )
-}
+})
