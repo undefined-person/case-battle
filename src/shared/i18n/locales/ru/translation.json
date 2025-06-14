@@ -8,7 +8,9 @@
       "upgrades": "Апгрейды",
       "promoCode": "Активировать промокод",
       "enterPromo": "Введите промокод",
-      "activate": "Активировать"
+      "activate": "Активировать",
+      "promoCodeRequired": "Промокод обязателен",
+      "promoCodeActivated": "Промокод активирован"
     },
     "language": {
       "select": "Выбрать язык"

@@ -8,6 +8,7 @@ import Upgrade from '../../pages/upgrade/upgrade'
 import Profile from '../../pages/profile/profile'
 import Inventory from '../../pages/inventory/inventory'
 import History from '../../pages/history/history'
+import Upgrades from '../../pages/profile/upgrades/upgrades'
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
   {
     path: '/profile/history',
     element: <History />,
+    isMainLayout: true,
+  },
+  {
+    path: '/profile/upgrade',
+    element: <Upgrades />,
     isMainLayout: true,
   },
   {

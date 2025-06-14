@@ -9,8 +9,7 @@ import { inventory as inventoryData } from '../../shared/constants/inventory'
 import { gifts as giftsData } from '../../shared/constants/gifts'
 import TGSAnimation from '../../shared/components/tgs-animation/tgs-animation'
 import StarIcon from '../../shared/assets/icons/star.svg?react'
-import Toast from '../../shared/ui/toast/toast'
-import useToast from '../../shared/ui/toast/useToast'
+import { useToast } from '../../shared/ui/toast/toastContext'
 
 const MULTIPLIERS = [1.5, 2, 3, 5, 10, 20]
 const MULTIPLIERS_LABELS = MULTIPLIERS.map((x) => `x${x}`)
@@ -33,7 +32,7 @@ export default function Upgrade() {
   const innerRadius = 75
   const circumference = useMemo(() => 2 * Math.PI * radius, [radius])
 
-  const { visible, message, showToast } = useToast()
+  const { showToast } = useToast()
 
   const getClosestMultiplier = useCallback((ratio) => {
     let closest = MULTIPLIERS[0]
@@ -76,7 +75,7 @@ export default function Upgrade() {
       if (closestItem && minDiff <= tolerance) {
         setSelectedItems([selectedItems[0], closestItem])
       } else {
-        showToast('No gift found for this multiplier.')
+        showToast(t('upgrade.no_gift'))
       }
     }
   }
@@ -165,7 +164,6 @@ export default function Upgrade() {
     })
   }
 
-  // Filtered items for the current tab
   const filteredItems = useMemo(() => {
     return activeTab === 'inventory'
       ? inventoryData.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()))
@@ -363,7 +361,6 @@ export default function Upgrade() {
           </motion.div>
         )}
       </AnimatePresence>
-      <Toast message={message} visible={visible} />
     </div>
   )
 }

@@ -8,7 +8,9 @@
       "upgrades": "Upgrades",
       "promoCode": "Activate promo code",
       "enterPromo": "Enter promo code",
-      "activate": "Activate"
+      "activate": "Activate",
+      "promoCodeRequired": "Promo code is required",
+      "promoCodeActivated": "Promo code activated"
     },
     "language": {
       "select": "Select language"
