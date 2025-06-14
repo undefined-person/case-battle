@@ -1,4 +1,3 @@
-import Header from '../../shared/components/header/header'
 import Avatar from '../../shared/assets/images/avatar.png'
 import GiftIcon from '../../shared/assets/icons/gift.svg?react'
 import HistoryIcon from '../../shared/assets/icons/history.svg?react'
@@ -9,6 +8,7 @@ import styles from './profile.module.scss'
 import Button from '../../shared/ui/button/button'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useToast } from '../../shared/ui/toast/toastContext'
 
 const menuItems = [
   {
@@ -31,10 +31,22 @@ const menuItems = [
 export default function Profile() {
   const navigate = useNavigate()
   const { t, i18n } = useTranslation()
+  const { showToast } = useToast()
   const [isOpen, setIsOpen] = useState(false)
+  const [promoCode, setPromoCode] = useState('')
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng)
+  }
+
+  const handlePromoCodeSubmit = () => {
+    if (!promoCode) {
+      showToast(t('profile.menu.promoCodeRequired'))
+      return
+    }
+
+    showToast(t('profile.menu.promoCodeActivated'))
+    setIsOpen(false)
   }
 
   return (
@@ -53,15 +65,36 @@ export default function Profile() {
             {t(`profile.${item.label}`)}
           </div>
         ))}
-        <div className={styles.promo_container} onClick={() => setIsOpen(!isOpen)}>
+        <div
+          className={styles.promo_container}
+          onClick={(e) => {
+            e.stopPropagation()
+            setIsOpen(!isOpen)
+          }}>
           <div className={`${styles.promo_header} ${isOpen ? styles.active : ''}`}>
             <PlusIcon />
             <span>{t('profile.menu.promoCode')}</span>
           </div>
           {isOpen && (
-            <div className={styles.promo_content}>
-              <input type="text" placeholder={t('profile.menu.enterPromo')} className={styles.promo_input} />
-              <Button className={styles.promo_button}>{t('profile.menu.activate')}</Button>
+            <div className={styles.promo_content} onClick={(e) => e.stopPropagation()}>
+              <input
+                type="text"
+                placeholder={t('profile.menu.enterPromo')}
+                className={styles.promo_input}
+                value={promoCode}
+                onChange={(e) => {
+                  e.stopPropagation()
+                  setPromoCode(e.target.value)
+                }}
+              />
+              <Button
+                className={styles.promo_button}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handlePromoCodeSubmit()
+                }}>
+                {t('profile.menu.activate')}
+              </Button>
             </div>
           )}
         </div>
